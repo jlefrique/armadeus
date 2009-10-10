@@ -1,0 +1,6 @@
+config BR2_PACKAGE_GSPCA
+	bool "gspca"
+	help
+	  GSPCA Linux kernel webcams Driver.
+
+	  http://mxhaard.free.fr/
