@@ -11,7 +11,7 @@ GSPCA_BUILD_DIR=$(BUILD_DIR)/gspcav1-$(GSPCA_VERSION)
 GSPCA_PKG_DIR=$(BASE_DIR)/package/gspca
 GSPCA_CAT:=$(ZCAT)
 GSPCA_MODULE=$(GSPCA_BUILD_DIR)/gspca.ko
-GSPCA_TARGET_MODULE=$(TARGET_DIR)/lib/modules/2.6.29.6/extra/gspca.ko
+GSPCA_TARGET_MODULE=$(TARGET_DIR)/lib/modules/2.6.24.3/extra/gspca.ko
 
 GSPCA_CFLAGS := "-DGSPCA_ENABLE_COMPRESSION"
 GSPCA_CFLAGS += "-DCONFIG_USB_GSPCA_MODULE=1"
@@ -29,6 +29,7 @@ $(GSPCA_BUILD_DIR)/.unpacked: $(DL_DIR)/$(GSPCA_SOURCE)
 	touch $(GSPCA_BUILD_DIR)/.unpacked
 
 $(GSPCA_MODULE): $(GSPCA_BUILD_DIR)/.unpacked
+	echo "****"
 	$(MAKE) -C "$(LINUX_DIR)" \
 		CROSS_COMPILE="$(KERNEL_CROSS)" \
 		ARCH=$(ARCH) \
@@ -39,6 +40,7 @@ $(GSPCA_MODULE): $(GSPCA_BUILD_DIR)/.unpacked
 	touch $@
 
 $(GSPCA_TARGET_MODULE): $(GSPCA_MODULE)
+	echo "@@@@"
 	$(MAKE) -C "$(LINUX_DIR)" \
 		CROSS_COMPILE="$(KERNEL_CROSS)" \
 		ARCH=$(ARCH) \
